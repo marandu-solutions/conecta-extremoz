@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currículo - {{NOME_COMPLETO}}</title>
+    <style>
+        :root {
+            --primary-color: #003459;
+            --secondary-color: #00A8E8;
+            --text-dark: #333333;
+            --text-light: #666666;
+            --bg-gray: #F5F7FA;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            max-width: 21cm; /* A4 width */
+            margin: 0 auto;
+            padding: 2cm;
+            background-color: white;
+        }
+
+        /* Cabeçalho */
+        header {
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            font-size: 28px;
+            margin: 0 0 10px 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            font-size: 13px;
+            color: var(--text-light);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* Objetivo e Resumo */
+        .objective-box {
+            background-color: var(--bg-gray);
+            padding: 15px;
+            border-left: 4px solid var(--secondary-color);
+            margin-bottom: 30px;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .objective-box p {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        /* Seções */
+        section {
+            margin-bottom: 25px;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            font-size: 18px;
+            margin: 0 0 15px 0;
+            text-transform: uppercase;
+            border-bottom: 1px solid #EEEEEE;
+            padding-bottom: 5px;
+        }
+
+        /* Experiência e Educação */
+        .item-block {
+            margin-bottom: 15px;
+        }
+
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 5px;
+        }
+
+        .item-title {
+            font-weight: bold;
+            font-size: 15px;
+            color: var(--text-dark);
+        }
+
+        .item-subtitle {
+            font-size: 14px;
+            color: var(--secondary-color);
+            font-weight: 500;
+        }
+
+        .item-date {
+            font-size: 13px;
+            color: var(--text-light);
+            font-style: italic;
+        }
+
+        .item-description {
+            font-size: 13px;
+            margin: 5px 0 0 0;
+            color: #444;
+        }
+
+        /* Tags e Habilidades */
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tag {
+            background-color: var(--bg-gray);
+            border: 1px solid #E0E0E0;
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            color: var(--text-dark);
+        }
+
+        /* Grid para Qualificações */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        ul {
+            margin: 5px 0 0 0;
+            padding-left: 20px;
+            font-size: 13px;
+        }
+
+        li {
+            margin-bottom: 4px;
+        }
+
+        /* Rodapé gerado pelo sistema */
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 10px;
+            color: #999;
+            border-top: 1px solid #EEE;
+            padding-top: 10px;
+        }
+
+        @media print {
+            body {
+                padding: 0;
+            }
+            .objective-box {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>{{NOME_COMPLETO}}</h1>
+        <div class="contact-info">
+            <div class="contact-item">📱 {{TELEFONE}}</div>
+            <div class="contact-item">✉️ {{EMAIL}}</div>
+            <div class="contact-item">📍 {{ENDERECO}}, {{BAIRRO}}</div>
+            <!-- Renderizar condicionalmente no gerador -->
+            {{#if LINKEDIN}}
+            <div class="contact-item">🔗 {{LINKEDIN}}</div>
+            {{/if}}
+        </div>
+    </header>
+
+    <div class="objective-box">
+        <p><strong>Objetivo Profissional:</strong> Atuar como {{CARGO_DESEJADO}} na área de {{AREAS_INTERESSE}}.</p>
+        <p><strong>Disponibilidade:</strong> {{DISPONIBILIDADE}} | <strong>Primeiro Emprego:</strong> {{PRIMEIRO_EMPREGO_SIM_NAO}}</p>
+    </div>
+
+    <section>
+        <h2>Experiência Profissional</h2>
+        <!-- Loop de Experiências (a ser substituído pelo gerador PDF) -->
+        {{#each EXPERIENCIAS}}
+        <div class="item-block">
+            <div class="item-header">
+                <div>
+                    <div class="item-title">{{CARGO}}</div>
+                    <div class="item-subtitle">{{EMPRESA}}</div>
+                </div>
+                <div class="item-date">{{DATA_INICIO}} - {{DATA_FIM}}</div>
+            </div>
+            <p class="item-description">{{DESCRICAO}}</p>
+        </div>
+        {{/each}}
+    </section>
+
+    <section>
+        <h2>Formação Acadêmica</h2>
+        <!-- Loop de Formações -->
+        {{#each FORMACOES}}
+        <div class="item-block">
+            <div class="item-header">
+                <div>
+                    <div class="item-title">{{GRAU_ESCOLARIDADE}} {{#if NOME_CURSO}} em {{NOME_CURSO}}{{/if}}</div>
+                    <div class="item-subtitle">{{INSTITUICAO}}</div>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </section>
+
+    <div class="grid-2">
+        <section>
+            <h2>Cursos e Qualificações</h2>
+            <ul>
+                <!-- Loop Cursos -->
+                {{#each CURSOS_EXTRAS}}
+                <li>{{NOME_CURSO}}</li>
+                {{/each}}
+            </ul>
+            <p style="font-size: 13px; margin-top: 10px;"><strong>CNH:</strong> Categoria {{CNH}}</p>
+        </section>
+
+        <section>
+            <h2>Idiomas</h2>
+            <ul>
+                <!-- Loop Idiomas -->
+                {{#each IDIOMAS}}
+                <li><strong>{{NOME_IDIOMA}}:</strong> {{NIVEL}}</li>
+                {{/each}}
+            </ul>
+        </section>
+    </div>
+
+    <section>
+        <h2>Habilidades (Soft e Hard Skills)</h2>
+        <div class="tags-container">
+            <!-- Loop Habilidades -->
+            {{#each HABILIDADES}}
+            <span class="tag">{{NOME_HABILIDADE}}</span>
+            {{/each}}
+        </div>
+    </section>
+
+    <footer>
+        Currículo gerado através da plataforma CONECTA - Prefeitura Municipal de Extremoz.<br>
+        Documento verificado e autenticado eletronicamente.
+    </footer>
+
+</body>
+</html>
