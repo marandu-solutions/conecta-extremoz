@@ -6,6 +6,7 @@ import 'package:conecta/models/worker/resume_model.dart';
 import 'components/resume_header.dart';
 import 'components/resume_section_card.dart';
 import 'components/edit_personal_info_modal.dart';
+import '../../../studio/resume_studio/resume_studio.dart';
 
 class ResumePage extends StatefulWidget {
   const ResumePage({super.key});
@@ -42,7 +43,9 @@ class _ResumePageState extends State<ResumePage> {
       // Mock para as outras seções
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Modal de edição para "$section" será implementado em breve.'),
+          content: Text(
+            'Modal de edição para "$section" será implementado em breve.',
+          ),
           backgroundColor: AppTheme.primaryColor,
         ),
       );
@@ -50,11 +53,10 @@ class _ResumePageState extends State<ResumePage> {
   }
 
   void _generatePdf() {
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Lendo template HTML e gerando PDF... (Simulação)'),
-        backgroundColor: AppTheme.primaryDark,
-        duration: Duration(seconds: 3),
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ResumeStudio(resumeData: _resume),
       ),
     );
   }
